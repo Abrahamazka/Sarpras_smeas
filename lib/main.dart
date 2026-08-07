@@ -267,6 +267,47 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
+                              String inputid = _idController.text;
+                              String inputpass = _passwordController.text;
+
+                              if (inputid.isEmpty || inputpass.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('NIK / PASSWORD TIDAK BOLEH KOSONG !!'), backgroundColor: Colors.red,
+                                  ),
+                                );
+                              return;
+                              }
+
+                              if (isAdmin == true) {
+                                if(inputid == 'admin' && inputpass == 'admin123') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Selamat datang, Komandan !!'), backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardAdmin()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Username atau Password salah !'), backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }
+                              else {
+                                if(inputid == '326131' && inputpass == 'Smkn1sby') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Login berhasil, Selamat datang !'), backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardSiswa()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('NIK / PASSWORD SALAH'), backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.transparent,
@@ -390,6 +431,54 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+class DashboardSiswa extends StatelessWidget {
+  const DashboardSiswa({super.key});
+
+  @override 
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Ini Dashboard Siswa Bosque', style: TextStyle(color: Colors.white)), backgroundColor: AppColors.primary,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logo.png', height: 100),
+            const SizedBox(height: 30),
+            const Text('IBAD == ALVIN SHAKA, NYEREPOOOOOOO', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class DashboardAdmin extends StatelessWidget {
+  const DashboardAdmin({super.key});
+
+  @override 
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Hai, Anda Di Dashboard Admin', style: TextStyle(color: Colors.white)), backgroundColor: AppColors.primary,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/sarpras.png', height: 100),
+            const SizedBox(height: 30),
+            const Text('Halo pak anton tercinta dan terhormat.', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+            ),
+          ],
         ),
       ),
     );
